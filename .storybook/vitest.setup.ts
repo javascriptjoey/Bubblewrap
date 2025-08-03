@@ -7,9 +7,31 @@ import * as projectAnnotations from "./preview";
 setProjectAnnotations([a11yAddonAnnotations, projectAnnotations]);
 
 // Configure React testing environment
-import { beforeEach } from "vitest";
+import { beforeEach, afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
 
 beforeEach(() => {
   // Clear any previous DOM state
   document.body.innerHTML = "";
+  
+  // Ensure we have a clean React environment
+  if (typeof window !== "undefined") {
+    // Reset any global state
+    window.location.hash = "";
+  }
+});
+
+afterEach(() => {
+  // Clean up after each test
+  cleanup();
+  
+  // Clear any timers or async operations
+  if (typeof window !== "undefined") {
+    // Clear any pending timeouts/intervals
+    const highestTimeoutId = Number(setTimeout(() => {}, 0));
+    for (let i = 0; i < highestTimeoutId; i++) {
+      clearTimeout(i);
+      clearInterval(i);
+    }
+  }
 });

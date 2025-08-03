@@ -17,11 +17,18 @@ export default defineConfig({
     include: ["markdown-to-jsx", "react/jsx-dev-runtime"],
   },
   test: {
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      include: ["src/**/*"],
+      exclude: ["src/**/*.stories.{ts,tsx}", "src/**/*.d.ts"],
+    },
     projects: [
       // Regular unit tests project
       {
         test: {
           environment: "jsdom",
+          setupFiles: ["@testing-library/jest-dom"],
         },
       },
       // Storybook tests project
