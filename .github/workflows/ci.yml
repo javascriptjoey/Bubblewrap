@@ -29,9 +29,9 @@ jobs:
         run: npm run lint
 
       - name: Run tests
-        run: npx vitest run --config vitest.config.ci.ts --coverage
-        # Note: Uses CI-specific config for reliable jsdom unit tests
-        # Local development uses full browser testing via main vite.config.ts
+        run: npm run test:run
+        # Note: test:run now uses CI-specific config for reliable jsdom unit tests
+        # Local browser testing available via: npm run test:browser
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
