@@ -129,7 +129,7 @@ This project uses a **dual testing approach** for maximum reliability and develo
 ```bash
 npm run test:run      # Runs jsdom unit tests with coverage
 ```
-- **Environment**: jsdom (Node.js simulation)
+- **Environment**: jsdom (DOM simulation in Node.js)
 - **Purpose**: CI validation, quick feedback
 - **Coverage**: Unit tests with code coverage reports
 - **Status**: ✅ 3/3 tests passing, 100% Button coverage
@@ -142,6 +142,42 @@ npm run test          # Interactive testing with watch mode
 - **Environment**: Chromium browser via Playwright
 - **Purpose**: Visual testing, interaction testing, story validation
 - **Features**: Real browser rendering, user interaction simulation
+
+### 🤔 **Why jsdom Instead of Just Node.js?**
+
+**The Problem**: React components need DOM APIs (like `document`, `window`, HTML elements), but Node.js doesn't have them.
+
+```javascript
+// This would FAIL in pure Node.js:
+const button = document.createElement('button'); // ❌ ReferenceError: document is not defined
+button.textContent = 'Click me';
+```
+
+**The Solution**: jsdom creates a **fake browser environment** inside Node.js.
+
+| Environment | What It Provides | Use Case |
+|-------------|------------------|----------|
+| **Pure Node.js** | Server APIs only (`fs`, `http`, etc.) | Backend code, CLI tools |
+| **jsdom + Node.js** | Fake DOM + Browser APIs | Testing React components |
+| **Real Browser** | Actual DOM + Full browser features | User interaction, visual testing |
+
+### 🔧 **How jsdom Works**
+
+```javascript
+// jsdom creates fake browser globals in Node.js:
+global.document = /* fake document object */
+global.window = /* fake window object */
+global.HTMLElement = /* fake HTML elements */
+
+// Now React components can render:
+const button = document.createElement('button'); // ✅ Works!
+```
+
+**Why This Matters for Our Tests**:
+- ✅ **Fast**: No browser startup time
+- ✅ **Reliable**: No graphics/network dependencies  
+- ✅ **CI-Friendly**: Works in headless environments
+- ✅ **Sufficient**: Tests component logic without visual complexity
 
 ### 📊 **Testing Architecture**
 
@@ -215,8 +251,8 @@ This architecture provides:
 - **Vitest** - Test runner and framework
 - **@testing-library/react** - Component testing utilities
 - **@testing-library/jest-dom** - DOM testing matchers
-- **jsdom** - DOM simulation for unit tests
-- **Playwright** - Browser automation for development
+- **jsdom** - Creates fake browser environment in Node.js for React testing
+- **Playwright** - Real browser automation for development
 - **@storybook/addon-vitest** - Storybook story testing
 - **@vitest/coverage-v8** - Code coverage reporting
 
