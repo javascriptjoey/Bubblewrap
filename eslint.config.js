@@ -10,7 +10,7 @@ import prettier from "eslint-plugin-prettier";
 import prettierConfig from "eslint-config-prettier";
 
 export default tseslint.config([
-  { ignores: ["dist", "storybook-static"] },
+  { ignores: ["dist", "storybook-static", "coverage"] },
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
