@@ -5,12 +5,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ```
-██████╗ ██╗   ██╗██████╗ ██████╗ ██╗     ███████╗██╗    ██╗██████╗  █████╗ ██████╗ 
+██████╗ ██╗   ██╗██████╗ ██████╗ ██╗     ███████╗██╗    ██╗██████╗  █████╗ ██████╗
 ██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔════╝██║    ██║██╔══██╗██╔══██╗██╔══██╗
 ██████╔╝██║   ██║██████╔╝██████╔╝██║     █████╗  ██║ █╗ ██║██████╔╝███████║██████╔╝
-██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔══╝  ██║███╗██║██╔══██╗██╔══██║██╔═══╝ 
-██████╔╝╚██████╔╝██████╔╝██████╔╝███████╗███████╗╚███╔███╔╝██║  ██║██║  ██║██║     
-╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     
+██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔══╝  ██║███╗██║██╔══██╗██╔══██║██╔═══╝
+██████╔╝╚██████╔╝██████╔╝██████╔╝███████╗███████╗╚███╔███╔╝██║  ██║██║  ██║██║
+╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝
 ```
 
 > A React component library built with **TypeScript**, **Vite**, and **Storybook** 🚀
@@ -23,7 +23,7 @@ Bubblewrap is my learning playground for mastering React through component-drive
 
 - **React 19.1** - Latest stable with modern features and enhanced hooks
 - **TypeScript 5.8** - Strict type safety with advanced inference
-- **Vite 7** - Lightning-fast HMR, native ESM, optimized builds  
+- **Vite 7** - Lightning-fast HMR, native ESM, optimized builds
 - **Storybook 9.1** - Component-driven development with modern addons
 - **Tailwind CSS 4.1** - Utility-first styling with Vite integration
 - **Vitest 3.2** - Fast unit testing with native TypeScript support
@@ -72,26 +72,30 @@ npm run test
 ## 📖 Available Scripts
 
 ### 🚀 **Development**
+
 - `npm run dev` - Start development server (Vite)
 - `npm run storybook` - Start Storybook development server
 - `npm run preview` - Preview production build locally
 
 ### 🧪 **Testing**
+
 - `npm run test` - Interactive testing with watch mode
 - `npm run test:run` - Run CI tests with coverage (jsdom)
 - `npm run test:browser` - Run full browser tests (development)
 
 ### 🏗️ **Build & Deploy**
+
 - `npm run build` - Build application for production
 - `npm run build-storybook` - Build Storybook for deployment
 - `npm run lint` - Run ESLint code quality checks
 
 ### 📊 **Quick Commands**
+
 ```bash
 # Start coding
 npm run dev
 
-# Test components in isolation  
+# Test components in isolation
 npm run storybook
 
 # Run tests like CI does
@@ -106,7 +110,7 @@ npm run build
 ### Basic Components
 
 - **Button** - Interactive button with primary/secondary variants and size options
-- **Header** - Navigation header with user authentication states  
+- **Header** - Navigation header with user authentication states
 - **Page** - Complete page layout demonstrating component composition
 
 ### Coming Soon
@@ -126,19 +130,23 @@ View and interact with components in isolation at `http://localhost:6006` when r
 This project uses a **dual testing approach** for maximum reliability and development experience:
 
 ### 🎯 **CI/Production Testing** (Reliable & Fast)
+
 ```bash
 npm run test:run      # Runs jsdom unit tests with coverage
 ```
+
 - **Environment**: jsdom (DOM simulation in Node.js)
 - **Purpose**: CI validation, quick feedback
 - **Coverage**: Unit tests with code coverage reports
 - **Status**: ✅ 3/3 tests passing, 100% Button component coverage
 
 ### 🌐 **Local Development Testing** (Full Browser Power)
+
 ```bash
 npm run test:browser  # Runs full browser + Storybook tests
 npm run test          # Interactive testing with watch mode
 ```
+
 - **Environment**: Chromium browser via Playwright
 - **Purpose**: Visual testing, interaction testing, story validation
 - **Features**: Real browser rendering, user interaction simulation
@@ -161,15 +169,15 @@ const Button: React.FC<ButtonProps> = ({ onClick, children }) => (
 
 **The Solution**: jsdom provides a complete DOM implementation in Node.js for testing React components.
 
-| Environment | What It Provides | Use Case |
-|-------------|------------------|----------|
-| **Pure Node.js** | Server APIs (`fs`, `http`, `process`) | Backend services, CLI tools |
-| **jsdom + Node.js** | Virtual DOM + Browser APIs | Unit testing React components |
-| **Real Browser** | Full DOM + Web APIs + Rendering | E2E testing, visual validation |
+| Environment         | What It Provides                      | Use Case                       |
+| ------------------- | ------------------------------------- | ------------------------------ |
+| **Pure Node.js**    | Server APIs (`fs`, `http`, `process`) | Backend services, CLI tools    |
+| **jsdom + Node.js** | Virtual DOM + Browser APIs            | Unit testing React components  |
+| **Real Browser**    | Full DOM + Web APIs + Rendering       | E2E testing, visual validation |
 
 ### 🔧 **How jsdom Works**
 
-```typescript
+````typescript
 // jsdom creates virtual browser globals in Node.js:
 declare global {
   const document: Document;
@@ -184,19 +192,20 @@ import { Button } from './Button';
 import type { ButtonProps } from './Button';
 
 // Type-safe component testing:
-const renderButton = (props: Partial<ButtonProps> = {}) => 
+const renderButton = (props: Partial<ButtonProps> = {}) =>
   render(<Button label="Click me" {...props} />);
 
 // Comprehensive testing with proper TypeScript support:
 test('Button renders with correct accessibility attributes', () => {
   renderButton({ primary: true, label: 'Submit form' });
-  
+
   const button = screen.getByRole('button', { name: /submit form/i });
   expect(button).toBeInTheDocument();
   expect(button).toHaveAttribute('type', 'button');
 });
-```
-```
+````
+
+````
 
 **Why This Matters for Modern React Development**:
 - ✅ **Type Safety**: Full TypeScript support in test environment
@@ -230,7 +239,7 @@ Coverage reports are automatically generated and include:
 
 ```bash
 npm run test:run      # Generates coverage in /coverage folder
-```
+````
 
 ## 🚀 CI/CD Pipeline
 
@@ -248,12 +257,14 @@ Every push triggers comprehensive validation:
 ### 🔄 **GitHub Actions Workflows**
 
 #### **Main CI Pipeline** (`.github/workflows/ci.yml`)
+
 - **Trigger**: Push to `main`/`develop`, Pull Requests
 - **Environment**: Ubuntu Latest, Node.js 20
 - **Steps**: Install → Lint → Test → Build → Coverage Upload
 - **Status**: [![Build Status](https://github.com/javascriptjoey/Bubblewrap/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/javascriptjoey/Bubblewrap/actions)
 
 #### **Storybook Deployment** (`.github/workflows/storybook.yml`)
+
 - **Trigger**: Push to `main`
 - **Output**: [Live Storybook](https://javascriptjoey.github.io/Bubblewrap/)
 - **Features**: Automatic GitHub Pages deployment
@@ -262,11 +273,13 @@ Every push triggers comprehensive validation:
 
 **Problem Solved**: CI environments are restrictive and don't handle complex browser testing well.
 
-**Solution**: 
+**Solution**:
+
 - **CI**: Simple, reliable jsdom tests for validation
 - **Local**: Full browser testing for comprehensive development
 
 This architecture provides:
+
 - ✅ **Reliable CI** - No flaky browser dependencies
 - ✅ **Rich Development** - Full Storybook interaction testing
 - ✅ **Fast Feedback** - Quick unit test results
@@ -348,6 +361,7 @@ npm run storybook      # Storybook at http://localhost:6006
 ### ✅ **Testing Before Push**
 
 Always run these commands before committing:
+
 ```bash
 npm run lint           # Fix any code quality issues
 npm run test:run       # Ensure all tests pass
