@@ -1,69 +1,103 @@
-# React + TypeScript + Vite
+# 🫧 Bubblewrap
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+██████╗ ██╗   ██╗██████╗ ██████╗ ██╗     ███████╗██╗    ██╗██████╗  █████╗ ██████╗
+██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔════╝██║    ██║██╔══██╗██╔══██╗██╔══██╗
+██████╔╝██║   ██║██████╔╝██████╔╝██║     █████╗  ██║ █╗ ██║██████╔╝███████║██████╔╝
+██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔══╝  ██║███╗██║██╔══██╗██╔══██║██╔═══╝
+██████╔╝╚██████╔╝██████╔╝██████╔╝███████╗███████╗╚███╔███╔╝██║  ██║██║  ██║██║
+╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> A React component library built with **TypeScript**, **Vite**, and **Storybook** 🚀
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🎯 Purpose
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Bubblewrap is my learning playground for mastering React through component-driven development. Starting with simple components like buttons and building up to complex UI elements like carousels, forms, and layouts.
+
+## 🛠️ Tech Stack
+
+- **React 19** - The latest and greatest
+- **TypeScript** - Type safety and better DX
+- **Vite** - Lightning fast build tool
+- **Storybook** - Component development and documentation
+- **Tailwind CSS** - Utility-first styling
+- **Vitest** - Testing framework
+- **ESLint + Prettier** - Code quality and formatting
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Launch Storybook
+npm run storybook
+
+# Run tests
+npm run test
 ```
+
+## 📚 Learning Journey
+
+- ✅ Project setup with Vite + React + TypeScript
+- ✅ Storybook integration
+- ⏳ Building basic components (Button, Header, etc.)
+- ⏳ State management
+- ⏳ Advanced components (Carousel, Forms)
+- ⏳ Building complete web pages
+
+## 📖 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run storybook` - Start Storybook development server
+- `npm run build-storybook` - Build Storybook for production
+- `npm run test` - Run tests with Vitest
+
+## 🧩 Component Library
+
+### Basic Components
+
+- **Button** - Interactive buttons with variants
+- **Header** - Navigation headers
+- **Page** - Page layouts
+
+### Coming Soon
+
+- 🎠 **Carousel** - Image/content carousel
+- 📝 **Forms** - Input fields, validation
+- 🏗️ **Layout** - Grid systems, containers
+- 🎨 **Theming** - Dark/light mode support
+
+## 🎨 Storybook
+
+View and interact with components in isolation at `http://localhost:6006` when running Storybook.
+
+## 🧪 Testing
+
+This project includes:
+
+- **Vitest** for unit testing
+- **@storybook/addon-vitest** for story-based testing
+- **@vitest/coverage-v8** for coverage reports
+- **Playwright** for browser testing
+
+## 📝 Learning Notes
+
+This project serves as a hands-on learning experience for:
+
+- Component architecture patterns
+- React state management
+- TypeScript best practices
+- Testing strategies
+- CI/CD with GitHub Actions
+
+---
+
+_Built with ❤️ and lots of ☕ while learning React_
