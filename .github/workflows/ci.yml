@@ -2,16 +2,16 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   # Quality checks job
   quality:
     runs-on: ubuntu-latest
     name: Code Quality & Testing
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

@@ -32,11 +32,13 @@ Bubblewrap is my learning playground for mastering React through component-drive
 ## 🚀 Getting Started
 
 ### 🌐 Try Online (No Download Required!)
-- **Storybook Demo**: [https://javascriptjoey.github.io/Bubblewrap/](https://javascriptjoey.github.io/Bubblewrap/) *(auto-deployed from main branch)*
+
+- **Storybook Demo**: [https://javascriptjoey.github.io/Bubblewrap/](https://javascriptjoey.github.io/Bubblewrap/) _(auto-deployed from main branch)_
 - **CodeSandbox**: [Open in CodeSandbox](https://codesandbox.io/s/github/javascriptjoey/Bubblewrap)
 - **StackBlitz**: [Open in StackBlitz](https://stackblitz.com/github/javascriptjoey/Bubblewrap)
 
 ### 💻 Local Development
+
 ```bash
 # Clone the repository
 git clone https://github.com/javascriptjoey/Bubblewrap.git

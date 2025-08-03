@@ -1,27 +1,26 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
+import storybook from 'eslint-plugin-storybook';
 
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { globalIgnores } from 'eslint/config'
-import prettier from 'eslint-plugin-prettier'
-
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
 export default tseslint.config([
-  globalIgnores(['dist']),
+  { ignores: ['dist'] },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-      'plugin:prettier/recommended',
+      ...tseslint.configs.recommended,
+      prettierConfig,
     ],
     plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
       prettier,
     },
     languageOptions: {
@@ -29,11 +28,18 @@ export default tseslint.config([
       globals: globals.browser,
     },
     rules: {
-      'prettier/prettier': ['error', { semi: true, singleQuote: true, tabWidth: 2 }],
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'prettier/prettier': [
+        'error',
+        { semi: true, singleQuote: true, tabWidth: 2 },
+      ],
       'no-unused-vars': 'warn',
       'no-undef': 'error',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
     },
   },
-], storybook.configs["flat/recommended"]);
+  ...storybook.configs['flat/recommended'],
+]);
