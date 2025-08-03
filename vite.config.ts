@@ -14,8 +14,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   optimizeDeps: {
-    include: ["markdown-to-jsx", "react/jsx-dev-runtime"],
-    exclude: ["react"],
+    exclude: ["react", "react-dom", "markdown-to-jsx"],
   },
   test: {
     coverage: {
