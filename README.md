@@ -1,5 +1,9 @@
 # 🫧 Bubblewrap
 
+[![Build Status](https://github.com/javascriptjoey/Bubblewrap/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/javascriptjoey/Bubblewrap/actions)
+[![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=flat&logo=storybook&logoColor=white)](https://javascriptjoey.github.io/Bubblewrap/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ```
 ██████╗ ██╗   ██╗██████╗ ██████╗ ██╗     ███████╗██╗    ██╗██████╗  █████╗ ██████╗
 ██╔══██╗██║   ██║██╔══██╗██╔══██╗██║     ██╔════╝██║    ██║██╔══██╗██╔══██╗██╔══██╗
@@ -27,7 +31,17 @@ Bubblewrap is my learning playground for mastering React through component-drive
 
 ## 🚀 Getting Started
 
+### 🌐 Try Online (No Download Required!)
+- **Storybook Demo**: [https://javascriptjoey.github.io/Bubblewrap/](https://javascriptjoey.github.io/Bubblewrap/) *(auto-deployed from main branch)*
+- **CodeSandbox**: [Open in CodeSandbox](https://codesandbox.io/s/github/javascriptjoey/Bubblewrap)
+- **StackBlitz**: [Open in StackBlitz](https://stackblitz.com/github/javascriptjoey/Bubblewrap)
+
+### 💻 Local Development
 ```bash
+# Clone the repository
+git clone https://github.com/javascriptjoey/Bubblewrap.git
+cd Bubblewrap
+
 # Install dependencies
 npm install
 
