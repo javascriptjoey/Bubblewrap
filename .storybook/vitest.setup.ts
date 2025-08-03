@@ -5,3 +5,11 @@ import * as projectAnnotations from "./preview";
 // This is an important step to apply the right configuration when testing your stories.
 // More info at: https://storybook.js.org/docs/api/portable-stories/portable-stories-vitest#setprojectannotations
 setProjectAnnotations([a11yAddonAnnotations, projectAnnotations]);
+
+// Configure React testing environment
+import { beforeEach } from "vitest";
+
+beforeEach(() => {
+  // Clear any previous DOM state
+  document.body.innerHTML = "";
+});
