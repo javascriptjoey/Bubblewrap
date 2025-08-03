@@ -1,12 +1,12 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,28 +15,29 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     projects: [
+      // Regular unit tests project
       {
-        extends: true,
+        test: {
+          environment: "jsdom",
+        },
+      },
+      // Storybook tests project
+      {
         plugins: [
           // The plugin will run tests for the stories defined in your Storybook config
           // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
-            configDir: path.join(dirname, '.storybook'),
+            configDir: path.join(dirname, ".storybook"),
           }),
         ],
         test: {
-          name: 'storybook',
           browser: {
             enabled: true,
             headless: true,
-            provider: 'playwright',
-            instances: [
-              {
-                browser: 'chromium',
-              },
-            ],
+            provider: "playwright",
+            name: "chromium",
           },
-          setupFiles: ['.storybook/vitest.setup.ts'],
+          setupFiles: [".storybook/vitest.setup.ts"],
         },
       },
     ],
