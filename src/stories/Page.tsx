@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
 
 import { Header } from "./Header";
 import "./page.css";
@@ -7,20 +7,26 @@ type User = {
   name: string;
 };
 
-export const Page: FC = () => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+interface PageProps {
+  user?: User;
+  onLogin?: () => void;
+  onLogout?: () => void;
+  onCreateAccount?: () => void;
+}
 
-  const handleLogin = () => setUser({ name: "Jane Doe" });
-  const handleLogout = () => setUser(undefined);
-  const handleCreateAccount = () => setUser({ name: "Jane Doe" });
-
+export const Page: FC<PageProps> = ({
+  user,
+  onLogin = () => {},
+  onLogout = () => {},
+  onCreateAccount = () => {},
+}) => {
   return (
     <article>
       <Header
         user={user}
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-        onCreateAccount={handleCreateAccount}
+        onLogin={onLogin}
+        onLogout={onLogout}
+        onCreateAccount={onCreateAccount}
       />
 
       <section className="storybook-page">

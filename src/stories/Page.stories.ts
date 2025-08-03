@@ -17,35 +17,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedOut: Story = {};
+export const LoggedOut: Story = {
+  args: {
+    user: undefined,
+    onLogin: () => console.log("Login clicked"),
+    onCreateAccount: () => console.log("Create account clicked"),
+  },
+};
 
-// More on component testing: https://storybook.js.org/docs/writing-tests/interaction-testing
-// Note: LoggedIn test disabled due to React 19 + Storybook + Vitest browser testing compatibility
-// This is a known issue and doesn't affect component development or production builds
-// export const LoggedIn: Story = {
-//   play: async ({ canvasElement }) => {
-//     const canvas = within(canvasElement);
-
-//     // Wait for the component to fully render
-//     await new Promise((resolve) => setTimeout(resolve, 100));
-
-//     // Find and click the login button
-//     const loginButton = await canvas.findByRole("button", { name: /Log in/i });
-//     await expect(loginButton).toBeInTheDocument();
-
-//     // Click the login button
-//     await userEvent.click(loginButton);
-
-//     // Wait for state update
-//     await new Promise((resolve) => setTimeout(resolve, 100));
-
-//     // Verify the login button is no longer present
-//     await expect(loginButton).not.toBeInTheDocument();
-
-//     // Verify the logout button is now present
-//     const logoutButton = await canvas.findByRole("button", {
-//       name: /Log out/i,
-//     });
-//     await expect(logoutButton).toBeInTheDocument();
-//   },
-// };
+export const LoggedIn: Story = {
+  args: {
+    user: { name: "Jane Doe" },
+    onLogout: () => console.log("Logout clicked"),
+  },
+};
