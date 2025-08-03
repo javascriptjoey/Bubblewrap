@@ -32,7 +32,7 @@ jobs:
         run: npm run lint
 
       - name: Run tests
-        run: npm run test:ci
+        run: npx vitest run --config vitest.config.ci.ts --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
