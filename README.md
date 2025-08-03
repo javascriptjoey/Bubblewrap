@@ -21,13 +21,14 @@ Bubblewrap is my learning playground for mastering React through component-drive
 
 ## 🛠️ Tech Stack
 
-- **React 19** - The latest and greatest
-- **TypeScript** - Type safety and better DX
-- **Vite** - Lightning fast build tool
-- **Storybook** - Component development and documentation
-- **Tailwind CSS** - Utility-first styling
-- **Vitest** - Testing framework
-- **ESLint + Prettier** - Code quality and formatting
+- **React 19.1** - Latest stable with modern features and enhanced hooks
+- **TypeScript 5.8** - Strict type safety with advanced inference
+- **Vite 7** - Lightning-fast HMR, native ESM, optimized builds  
+- **Storybook 9.1** - Component-driven development with modern addons
+- **Tailwind CSS 4.1** - Utility-first styling with Vite integration
+- **Vitest 3.2** - Fast unit testing with native TypeScript support
+- **Playwright 1.54** - Cross-browser testing for Storybook components
+- **ESLint 9 + Prettier** - Modern flat config with auto-formatting
 
 ## 🚀 Getting Started
 
@@ -59,12 +60,14 @@ npm run test
 
 ## 📚 Learning Journey
 
-- ✅ Project setup with Vite + React + TypeScript
-- ✅ Storybook integration
-- ⏳ Building basic components (Button, Header, etc.)
-- ⏳ State management
-- ⏳ Advanced components (Carousel, Forms)
-- ⏳ Building complete web pages
+- ✅ **Modern React Architecture** - Component composition with TypeScript interfaces
+- ✅ **Vite + TypeScript Setup** - Fast development with strict type checking
+- ✅ **Storybook 8 Integration** - Component-driven development workflow
+- ⏳ **React 19 Features** - Server Components, Actions, and new hooks
+- ⏳ **Advanced TypeScript** - Generics, conditional types, and utility types
+- ⏳ **State Management** - React Context with TypeScript, built-in hooks patterns
+- ⏳ **Design Systems** - Compound components, polymorphic components
+- ⏳ **Performance Optimization** - React.memo, useMemo, Suspense boundaries
 
 ## 📖 Available Scripts
 
@@ -102,16 +105,17 @@ npm run build
 
 ### Basic Components
 
-- **Button** - Interactive buttons with variants
-- **Header** - Navigation headers
-- **Page** - Page layouts
+- **Button** - Interactive button with primary/secondary variants and size options
+- **Header** - Navigation header with user authentication states  
+- **Page** - Complete page layout demonstrating component composition
 
 ### Coming Soon
 
-- 🎠 **Carousel** - Image/content carousel
-- 📝 **Forms** - Input fields, validation
-- 🏗️ **Layout** - Grid systems, containers
-- 🎨 **Theming** - Dark/light mode support
+- 🎠 **Carousel** - Touch/swipe support with TypeScript event handlers
+- 📝 **Forms** - Form components with validation (considering React Hook Form + Zod)
+- 🏗️ **Layout** - CSS Grid/Flexbox components with responsive TypeScript props
+- 🎨 **Theming** - Design system with consistent styling approach
+- ♿ **Accessibility** - Enhanced focus management and ARIA patterns
 
 ## 🎨 Storybook
 
@@ -128,7 +132,7 @@ npm run test:run      # Runs jsdom unit tests with coverage
 - **Environment**: jsdom (DOM simulation in Node.js)
 - **Purpose**: CI validation, quick feedback
 - **Coverage**: Unit tests with code coverage reports
-- **Status**: ✅ 3/3 tests passing, 100% Button coverage
+- **Status**: ✅ 3/3 tests passing, 100% Button component coverage
 
 ### 🌐 **Local Development Testing** (Full Browser Power)
 ```bash
@@ -141,47 +145,73 @@ npm run test          # Interactive testing with watch mode
 
 ### 🤔 **Why jsdom Instead of Just Node.js?**
 
-**The Problem**: React components need DOM APIs (like `document`, `window`, HTML elements), but Node.js doesn't have them.
+**The Problem**: React components require browser APIs (`document`, `window`, DOM elements), but Node.js only provides server-side APIs.
 
-```javascript
+```typescript
 // This would FAIL in pure Node.js:
-const button = document.createElement('button'); // ❌ ReferenceError: document is not defined
-button.textContent = 'Click me';
+interface ButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+const Button: React.FC<ButtonProps> = ({ onClick, children }) => (
+  <button onClick={onClick}>{children}</button> // ❌ JSX needs DOM APIs
+);
 ```
 
-**The Solution**: jsdom creates a **fake browser environment** inside Node.js.
+**The Solution**: jsdom provides a complete DOM implementation in Node.js for testing React components.
 
 | Environment | What It Provides | Use Case |
 |-------------|------------------|----------|
-| **Pure Node.js** | Server APIs only (`fs`, `http`, etc.) | Backend code, CLI tools |
-| **jsdom + Node.js** | Fake DOM + Browser APIs | Testing React components |
-| **Real Browser** | Actual DOM + Full browser features | User interaction, visual testing |
+| **Pure Node.js** | Server APIs (`fs`, `http`, `process`) | Backend services, CLI tools |
+| **jsdom + Node.js** | Virtual DOM + Browser APIs | Unit testing React components |
+| **Real Browser** | Full DOM + Web APIs + Rendering | E2E testing, visual validation |
 
 ### 🔧 **How jsdom Works**
 
-```javascript
-// jsdom creates fake browser globals in Node.js:
-global.document = /* fake document object */
-global.window = /* fake window object */
-global.HTMLElement = /* fake HTML elements */
+```typescript
+// jsdom creates virtual browser globals in Node.js:
+declare global {
+  const document: Document;
+  const window: Window & typeof globalThis;
+  const HTMLElement: typeof HTMLElement;
+}
 
-// Now React components can render:
-const button = document.createElement('button'); // ✅ Works!
+```typescript
+// Modern React component testing with TypeScript (2025):
+import { render, screen } from '@testing-library/react';
+import { Button } from './Button';
+import type { ButtonProps } from './Button';
+
+// Type-safe component testing:
+const renderButton = (props: Partial<ButtonProps> = {}) => 
+  render(<Button label="Click me" {...props} />);
+
+// Comprehensive testing with proper TypeScript support:
+test('Button renders with correct accessibility attributes', () => {
+  renderButton({ primary: true, label: 'Submit form' });
+  
+  const button = screen.getByRole('button', { name: /submit form/i });
+  expect(button).toBeInTheDocument();
+  expect(button).toHaveAttribute('type', 'button');
+});
+```
 ```
 
-**Why This Matters for Our Tests**:
-- ✅ **Fast**: No browser startup time
-- ✅ **Reliable**: No graphics/network dependencies  
-- ✅ **CI-Friendly**: Works in headless environments
-- ✅ **Sufficient**: Tests component logic without visual complexity
+**Why This Matters for Modern React Development**:
+- ✅ **Type Safety**: Full TypeScript support in test environment
+- ✅ **Component Testing**: Test props, state, and user interactions
+- ✅ **Accessibility**: Validate ARIA attributes and semantic HTML
+- ✅ **Fast Feedback**: Instant test results without browser overhead
+- ✅ **CI/CD Ready**: Reliable testing in headless environments
 
 ### 📊 **Testing Architecture**
 
 | Test Type | Count | Environment | Purpose |
 |-----------|-------|-------------|---------|
 | **Unit Tests** | 3 | jsdom | Component logic validation |
-| **Storybook Tests** | 9 | Chromium | Visual & interaction testing |
-| **Total Coverage** | 12 | Dual setup | Comprehensive validation |
+| **Storybook Tests** | Story-based | Chromium | Visual & interaction testing |
+| **Total Coverage** | Mixed setup | Dual environment | Comprehensive validation |
 
 ### 🔧 **Testing Configuration Files**
 
@@ -256,40 +286,42 @@ This architecture provides:
 
 ### 🧠 **Learning Focus Areas**
 
-This project serves as a comprehensive learning experience covering:
+This project serves as a comprehensive learning experience covering modern React development:
 
-- **Component Architecture** - Building reusable, composable components
-- **React 19 Features** - Latest React patterns and best practices  
-- **TypeScript Integration** - Type-safe component development
-- **Testing Strategies** - Unit testing, integration testing, visual testing
-- **CI/CD Pipelines** - Automated quality assurance and deployment
-- **Storybook Workflow** - Component-driven development
-- **Code Quality** - ESLint, Prettier, and automated formatting
+- **Component Architecture** - TypeScript interfaces, compound components, polymorphic APIs
+- **React 19 Features** - Server Components, Actions, enhanced hooks, concurrent features
+- **Advanced TypeScript** - Generics, conditional types, template literals, utility types
+- **Testing Strategies** - Unit testing with React Testing Library, visual regression, accessibility testing
+- **CI/CD Pipelines** - GitHub Actions, automated type checking, build optimization
+- **Storybook Workflow** - Component documentation, interaction testing, design system management
+- **Performance** - Code splitting, tree shaking, bundle analysis, React DevTools Profiler
 
 ### 🔄 **Development Workflow**
 
-1. **Component Development** → Build components in isolation with Storybook
-2. **Unit Testing** → Write tests for component logic and behavior  
-3. **Integration Testing** → Test component interactions and user flows
-4. **Code Quality** → ESLint validation and Prettier formatting
-5. **CI Validation** → Automated testing and build verification
-6. **Deployment** → Automatic Storybook deployment to GitHub Pages
+1. **Type-Safe Component Development** → Define TypeScript interfaces and build components with strict typing
+2. **Storybook-First Design** → Document component APIs and interaction states
+3. **Test-Driven Development** → Write comprehensive tests with React Testing Library
+4. **Accessibility-First** → Ensure WCAG compliance and semantic HTML
+5. **Performance Monitoring** → Analyze bundle size and runtime performance
+6. **CI/CD Validation** → Automated type checking, testing, and deployment
 
 ### 🎯 **Key Takeaways**
 
-- **Dual Testing Strategy** - Reliable CI + Rich development experience
-- **Component-First Approach** - Build UI from small, reusable pieces
-- **Type Safety** - TypeScript catches errors before runtime
-- **Automated Quality** - CI prevents regressions and maintains standards
-- **Documentation** - Storybook serves as living component documentation
+- **Type-First Development** - TypeScript interfaces drive component design and API consistency
+- **Component Composition** - Build complex UIs from simple, reusable TypeScript components
+- **Modern Testing** - React Testing Library + Vitest for comprehensive component validation
+- **Performance-Conscious** - Bundle analysis, code splitting, and React concurrent features
+- **Accessibility by Default** - Semantic HTML, ARIA attributes, and keyboard navigation
+- **Developer Experience** - Fast HMR, type safety, and comprehensive tooling integration
 
 ### 🚀 **Next Steps**
 
-- Expand component library with forms, carousels, and complex layouts
-- Implement state management patterns (Context, Redux, Zustand)
-- Add accessibility testing and WCAG compliance
-- Explore advanced React patterns (render props, compound components)
-- Build complete application examples using the component library
+- **Advanced Component Patterns** - Compound components, render props, polymorphic components
+- **State Management** - React Context with TypeScript for complex state needs
+- **Design System** - Consistent design tokens and component APIs
+- **Modern React Features** - Exploring React 19 capabilities as they stabilize
+- **Performance Optimization** - React.memo, useMemo, useCallback, code splitting
+- **Accessibility Excellence** - Screen reader testing, focus management, WCAG compliance
 
 ---
 
@@ -324,11 +356,12 @@ npm run build          # Verify production build works
 
 ### 🔍 **Understanding the Testing Setup**
 
-- **Unit Tests** (`src/__tests__/`) - Test component logic
-- **Stories** (`src/stories/`) - Document component usage  
-- **CI Tests** - Automated validation on every push
-- **Coverage** - Track what code is tested
+- **Unit Tests** (`src/__tests__/`) - TypeScript component logic with React Testing Library
+- **Stories** (`src/stories/`) - Component documentation with TypeScript controls
+- **Type Checking** - `tsc --noEmit` validates TypeScript across the entire codebase
+- **CI Tests** - Automated validation on every push with full type safety
+- **Coverage** - Track test coverage with TypeScript-aware tooling
 
-The CI will automatically run when you push, but local testing catches issues faster!
+The CI automatically runs type checking, linting, and testing on every push!
 
 _Built with ❤️, lots of Celsius energy drinks, and ☕ while learning React_
